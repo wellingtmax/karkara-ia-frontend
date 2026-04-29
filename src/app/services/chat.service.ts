@@ -12,7 +12,7 @@ interface ChatResponse {
 })
 export class ChatService {
 
-  private apiUrl = 'http://localhost:3000/api/chat';
+  private apiUrl = 'https://karkara-ia-backend.onrender.com/api/chat';
 
   constructor(private http: HttpClient) { }
 
