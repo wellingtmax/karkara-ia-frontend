@@ -1,0 +1,66 @@
+<div class="chatgpt-layout">
+
+  <header class="chat-header">
+    <div>
+      <h1>KARKARA IA</h1>
+      <span>Assistente com Gemini</span>
+    </div>
+  </header>
+
+  <main class="chat-area">
+
+    <div class="welcome" *ngIf="messages.length === 1">
+      <h2>Como posso ajudar?</h2>
+      <p>Digite uma mensagem para começar a conversa.</p>
+    </div>
+
+    <div class="messages">
+
+      <div
+        *ngFor="let msg of messages"
+        class="message-row"
+        [ngClass]="msg.sender">
+
+        <div class="avatar">
+          {{ msg.sender === 'user' ? 'U' : 'IA' }}
+        </div>
+
+        <div class="message-bubble">
+          {{ msg.text }}
+        </div>
+
+      </div>
+
+      <div *ngIf="loading" class="message-row bot">
+        <div class="avatar">IA</div>
+        <div class="message-bubble typing">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="chat-footer">
+    <div class="input-box">
+      <textarea
+        [(ngModel)]="userMessage"
+        placeholder="Envie uma mensagem..."
+        rows="1"
+        (keydown.enter)="sendMessage(); $event.preventDefault()">
+      </textarea>
+
+      <button
+        (click)="sendMessage()"
+        [disabled]="loading || !userMessage.trim()">
+        ➤
+      </button>
+    </div>
+
+    <small>O assistente pode cometer erros. Confira informações importantes.</small>
+  </footer>
+
+</div>
